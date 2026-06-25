@@ -86,7 +86,7 @@ class TrafficResetService
       || $user->plan->reset_traffic_method === Plan::RESET_TRAFFIC_NEVER
       || ($user->plan->reset_traffic_method === Plan::RESET_TRAFFIC_FOLLOW_SYSTEM
         && (int) admin_setting('reset_traffic_method', Plan::RESET_TRAFFIC_MONTHLY) === Plan::RESET_TRAFFIC_NEVER)
-      || $user->expired_at === NULL
+      || !$user->expired_at
     ) {
       return null;
     }
@@ -271,7 +271,8 @@ class TrafficResetService
           ->where('id', '>', $lastProcessedId)
           ->where(function ($query) {
             $query->where('expired_at', '>', time())
-              ->orWhereNull('expired_at');
+              ->orWhereNull('expired_at')
+              ->orWhere('expired_at', 0);
           })
           ->where('banned', 0)
           ->whereNotNull('plan_id')

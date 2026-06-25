@@ -151,7 +151,7 @@ class OrderService
         $order = $this->order;
         if ($order->period === Plan::PERIOD_RESET_TRAFFIC) {
             $order->type = Order::TYPE_RESET_TRAFFIC;
-        } else if ($user->plan_id !== NULL && $order->plan_id !== $user->plan_id && ($user->expired_at > time() || $user->expired_at === NULL)) {
+        } else if ($user->plan_id !== NULL && $order->plan_id !== $user->plan_id && (!$user->expired_at || $user->expired_at > time())) {
             if (!(int) admin_setting('plan_change_enable', 1))
                 throw new ApiException('目前不允许更改订阅，请联系客服或提交工单操作');
             $order->type = Order::TYPE_UPGRADE;
@@ -163,7 +163,7 @@ class OrderService
             } else {
                 $order->total_amount = (int) ($order->total_amount - $order->surplus_amount);
             }
-        } else if (($user->expired_at === null || $user->expired_at > time()) && $order->plan_id == $user->plan_id) { // 用户订阅未过期或按流量订阅 且购买订阅与当前订阅相同 === 续费
+        } else if ((!$user->expired_at || $user->expired_at > time()) && $order->plan_id == $user->plan_id) { // 用户订阅未过期或按流量订阅 且购买订阅与当前订阅相同 === 续费
             $order->type = Order::TYPE_RENEWAL;
         } else { // 新购
             $order->type = Order::TYPE_NEW_PURCHASE;
@@ -220,7 +220,7 @@ class OrderService
 
     private function getSurplusValue(User $user, Order $order)
     {
-        if ($user->expired_at === NULL) {
+        if (!$user->expired_at) {
             $lastOneTimeOrder = Order::where('user_id', $user->id)
                 ->where('period', Plan::PERIOD_ONETIME)
                 ->where('status', Order::STATUS_COMPLETED)
@@ -346,7 +346,7 @@ class OrderService
         }
         $this->user->transfer_enable = $plan->transfer_enable * 1073741824;
         // 从一次性转换到循环或者新购的时候，重置流量
-        if ($this->user->expired_at === NULL || $order->type === Order::TYPE_NEW_PURCHASE)
+        if (!$this->user->expired_at || $order->type === Order::TYPE_NEW_PURCHASE)
             app(TrafficResetService::class)->performReset($this->user, TrafficResetLog::SOURCE_ORDER);
         $this->user->plan_id = $plan->id;
         $this->user->group_id = $plan->group_id;

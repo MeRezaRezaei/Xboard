@@ -136,7 +136,7 @@ class MailService
      */
     private function shouldSendExpireRemind(User $user): bool
     {
-        if ($user->expired_at === NULL) {
+        if (!$user->expired_at) {
             return false;
         }
         $expiredAt = $user->expired_at;

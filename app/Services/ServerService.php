@@ -97,8 +97,9 @@ class ServerService
             ->whereIn('group_id', $groupIds)
             ->whereRaw('u + d < transfer_enable')
             ->where(function ($query) {
-                $query->where('expired_at', '>=', time())
-                    ->orWhere('expired_at', NULL);
+                $query->where('expired_at', '>', time())
+                    ->orWhereNull('expired_at')
+                    ->orWhere('expired_at', 0);
             })
             ->where('banned', 0)
             ->select([

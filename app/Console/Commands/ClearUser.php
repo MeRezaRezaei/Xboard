@@ -41,7 +41,9 @@ class ClearUser extends Command
     {
         $builder = User::where('plan_id', NULL)
             ->where('transfer_enable', 0)
-            ->where('expired_at', 0)
+            ->whereNotNull('expired_at')
+            ->where('expired_at', '>', 0)
+            ->where('expired_at', '<', time())
             ->where('last_login_at', NULL);
         $count = $builder->count();
         if ($builder->delete()) {
