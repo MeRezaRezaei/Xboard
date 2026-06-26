@@ -35,3 +35,9 @@ compose.split.yaml
 tools/__pycache__/
 tools/graph.json
 tools/.venv/
+
+# AI strategy — never in public git
+tools/
+docs/project_brain/
+.env.ai
+*.env.ai
