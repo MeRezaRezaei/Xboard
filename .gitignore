@@ -41,3 +41,4 @@ tools/
 docs/project_brain/
 .env.ai
 *.env.ai
+project_export.md
