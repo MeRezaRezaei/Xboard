@@ -1,9 +1,9 @@
 {
-    "name": "xboard/xboard",
+    "name": "xxxboard/xxxboard",
     "type": "project",
-    "description": "xboard is a proxy protocol manage.",
+    "description": "xxxboard — a fork of xboard for enhanced VPN panel management.",
     "keywords": [
-        "xboard",
+        "xxxboard",
         "v2ray",
         "shadowsocks",
         "trojan",

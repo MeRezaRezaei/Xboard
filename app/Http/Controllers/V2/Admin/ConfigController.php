@@ -40,7 +40,7 @@ class ConfigController extends Controller
             'subject' => 'This is xboard test email',
             'template_name' => 'notify',
             'template_value' => [
-                'name' => admin_setting('app_name', 'XBoard'),
+                'name' => admin_setting('app_name', 'XXXBoard'),
                 'content' => 'This is xboard test email',
                 'url' => admin_setting('app_url')
             ]
@@ -107,7 +107,7 @@ class ConfigController extends Controller
                 'logo' => admin_setting('logo'),
                 'force_https' => (int) admin_setting('force_https', 0),
                 'stop_register' => (int) admin_setting('stop_register', 0),
-                'app_name' => admin_setting('app_name', 'XBoard'),
+                'app_name' => admin_setting('app_name', 'XXXBoard'),
                 'app_description' => admin_setting('app_description', 'XBoard is best!'),
                 'app_url' => admin_setting('app_url'),
                 'subscribe_url' => admin_setting('subscribe_url'),
@@ -132,7 +132,7 @@ class ConfigController extends Controller
                 'subscribe_path' => admin_setting('subscribe_path', 's'),
             ],
             'frontend' => [
-                'frontend_theme' => admin_setting('frontend_theme', 'Xboard'),
+                'frontend_theme' => admin_setting('frontend_theme', 'Xxxboard'),
                 'frontend_theme_sidebar' => admin_setting('frontend_theme_sidebar', 'light'),
                 'frontend_theme_header' => admin_setting('frontend_theme_header', 'dark'),
                 'frontend_theme_color' => admin_setting('frontend_theme_color', 'default'),

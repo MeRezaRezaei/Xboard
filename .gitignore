@@ -31,4 +31,5 @@ bun.lockb
 compose.yaml
 compose.host.yaml
 compose.split.yaml
-.scribe
+.scribetools/.venv/
+tools/__pycache__/
