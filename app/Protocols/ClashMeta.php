@@ -36,7 +36,7 @@ class ClashMeta extends AbstractProtocol
                 'http' => '0.0.0',
                 'h2' => '0.0.0',
                 'httpupgrade' => '0.0.0',
-                'xhttp' => ['extra' => null],
+                'xhttp' => '0.0.0',
             ],
             'strict' => true,
         ],

@@ -43,3 +43,6 @@ docs/project_brain/
 *.env.ai
 project_export.md
 .brain-index-manifest.json
+
+# AI brain tooling lives as its own nested git repo — never track it from Xboard
+/ai-brain/
