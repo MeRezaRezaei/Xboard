@@ -42,7 +42,7 @@ class SingBox extends AbstractProtocol
                     1 => '1.5.0'
                 ],
                 'protocol_settings.network' => [
-                    'xhttp' => '9999.0.0'
+                    'xhttp' => '1.10.0'
                 ]
             ],
             'vmess' => [
@@ -50,7 +50,7 @@ class SingBox extends AbstractProtocol
                     1 => '1.5.0'
                 ],
                 'protocol_settings.network' => [
-                    'xhttp' => '9999.0.0'
+                    'xhttp' => '1.10.0'
                 ]
             ],
             'trojan' => [
@@ -58,7 +58,7 @@ class SingBox extends AbstractProtocol
                     1 => '1.5.0'
                 ],
                 'protocol_settings.network' => [
-                    'xhttp' => '9999.0.0'
+                    'xhttp' => '1.10.0'
                 ]
             ],
             'hysteria' => [
@@ -152,7 +152,7 @@ class SingBox extends AbstractProtocol
             }
             if (
                 $item['type'] === Server::TYPE_VLESS
-                && in_array(data_get($protocol_settings, 'network'), ['tcp', 'ws', 'grpc', 'http', 'quic', 'httpupgrade'])
+                && in_array(data_get($protocol_settings, 'network'), ['tcp', 'ws', 'grpc', 'http', 'quic', 'httpupgrade', 'xhttp'])
             ) {
                 $vlessConfig = $this->buildVless($this->user['uuid'], $item);
                 $proxies[] = $vlessConfig;
@@ -873,6 +873,13 @@ class SingBox extends AbstractProtocol
                 'path' => data_get($protocol_settings, 'network_settings.path'),
                 'host' => data_get($protocol_settings, 'network_settings.host', $server['host']),
                 'headers' => data_get($protocol_settings, 'network_settings.headers')
+            ],
+            'xhttp' => [
+                'type' => 'xhttp',
+                'path' => data_get($protocol_settings, 'network_settings.path'),
+                'host' => data_get($protocol_settings, 'network_settings.host', $server['host']),
+                'mode' => data_get($protocol_settings, 'network_settings.mode', 'auto'),
+                'extra' => data_get($protocol_settings, 'network_settings.extra'),
             ],
             'quic' => ['type' => 'quic'],
             default => null
