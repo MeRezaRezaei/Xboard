@@ -42,3 +42,4 @@ docs/project_brain/
 .env.ai
 *.env.ai
 project_export.md
+.brain-index-manifest.json
