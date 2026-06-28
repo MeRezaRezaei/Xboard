@@ -236,6 +236,16 @@ class ServerSave extends FormRequest
             $rules['protocol_settings.' . $field] = $rule;
         }
 
+        if ($this->input('protocol_settings.network') === 'xhttp') {
+            $rules['protocol_settings.network_settings.path'] = 'required|string|regex:#^/#';
+            $rules['protocol_settings.network_settings.host'] = 'nullable|string';
+            $rules['protocol_settings.network_settings.mode'] = 'nullable|string|in:auto,stream,packet';
+            $rules['protocol_settings.network_settings.extra'] = 'nullable|array';
+            $rules['protocol_settings.network_settings.extra.headers'] = 'nullable|array';
+            $rules['protocol_settings.network_settings.extra.padding'] = 'nullable|boolean';
+            $rules['protocol_settings.network_settings.extra.muxx'] = 'nullable|boolean';
+        }
+
         return $rules;
     }
 

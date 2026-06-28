@@ -48,6 +48,7 @@ class ClashMeta extends AbstractProtocol
                 'http' => '0.0.0',
                 'h2' => '0.0.0',
                 'httpupgrade' => '0.0.0',
+                'xhttp' => '0.0.0',
             ],
             'strict' => true,
         ],
@@ -57,6 +58,7 @@ class ClashMeta extends AbstractProtocol
                 'ws' => '0.0.0',
                 'grpc' => '0.0.0',
                 'httpupgrade' => '0.0.0',
+                'xhttp' => '0.0.0',
             ],
             'strict' => true,
         ],
@@ -394,6 +396,18 @@ class ClashMeta extends AbstractProtocol
                 if ($host = data_get($protocol_settings, 'network_settings.host'))
                     $array['ws-opts']['headers'] = ['Host' => $host];
                 break;
+            case 'xhttp':
+                $array['network'] = 'xhttp';
+                $xhttpOpts = [];
+                if ($path = data_get($protocol_settings, 'network_settings.path'))
+                    $xhttpOpts['path'] = $path;
+                if ($host = data_get($protocol_settings, 'network_settings.host'))
+                    $xhttpOpts['host'] = $host;
+                if ($mode = data_get($protocol_settings, 'network_settings.mode'))
+                    $xhttpOpts['mode'] = $mode;
+                if (!empty($xhttpOpts))
+                    $array['xhttp-opts'] = $xhttpOpts;
+                break;
             default:
                 break;
         }
@@ -577,6 +591,18 @@ class ClashMeta extends AbstractProtocol
                     $array['ws-opts']['path'] = $path;
                 if ($host = data_get($protocol_settings, 'network_settings.host'))
                     $array['ws-opts']['headers'] = ['Host' => $host];
+                break;
+            case 'xhttp':
+                $array['network'] = 'xhttp';
+                $xhttpOpts = [];
+                if ($path = data_get($protocol_settings, 'network_settings.path'))
+                    $xhttpOpts['path'] = $path;
+                if ($host = data_get($protocol_settings, 'network_settings.host'))
+                    $xhttpOpts['host'] = $host;
+                if ($mode = data_get($protocol_settings, 'network_settings.mode'))
+                    $xhttpOpts['mode'] = $mode;
+                if (!empty($xhttpOpts))
+                    $array['xhttp-opts'] = $xhttpOpts;
                 break;
             default:
                 $array['network'] = 'tcp';

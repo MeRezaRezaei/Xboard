@@ -46,3 +46,4 @@ project_export.md
 
 # AI brain tooling lives as its own nested git repo — never track it from Xboard
 /ai-brain/
+/.brain-index/
