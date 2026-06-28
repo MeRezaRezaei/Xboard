@@ -48,3 +48,4 @@ project_export.md
 /ai-brain/
 /.brain-index/
 .tmp
+.phpunit.cache/
