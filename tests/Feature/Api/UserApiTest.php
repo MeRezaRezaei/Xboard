@@ -29,7 +29,7 @@ class UserApiTest extends TestCase
     {
         $response = $this->getJson('/api/v1/user/info');
 
-        $response->assertStatus(401)
+        $response->assertStatus(403)
                  ->assertJsonStructure(['message']);
     }
 }

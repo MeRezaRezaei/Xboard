@@ -15,8 +15,9 @@ class KnowledgeAdminApiTest extends TestCase
     {
         $admin = User::factory()->admin()->create();
 
-        $response = $this->actingAs($admin)->postJson('/api/v1/admin/knowledge/save', [
+        $response = $this->actingAs($admin)->postJson($this->getAdminUri('knowledge/save'), [
             'language' => 'en-US',
+            'category' => 'General',
             'title' => 'New Knowledge Base Article',
             'body' => 'This is the content of the article.',
             'show' => 1,

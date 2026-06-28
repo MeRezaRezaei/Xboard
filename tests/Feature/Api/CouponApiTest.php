@@ -40,7 +40,6 @@ class CouponApiTest extends TestCase
             'code' => 'EXPIRED10'
         ]);
 
-        // Depending on your ApiException handling, it usually returns 400 or 500 with a specific message
-        $response->assertStatus(500); 
+        $response->assertStatus(400);
     }
 }

@@ -16,7 +16,7 @@ class PaymentAdminApiTest extends TestCase
         $admin = User::factory()->admin()->create();
         Payment::factory()->create(['name' => 'CryptoPay']);
 
-        $response = $this->actingAs($admin)->getJson('/api/v1/admin/payment/fetch');
+        $response = $this->actingAs($admin)->getJson($this->getAdminUri('payment/fetch'));
 
         $response->assertStatus(200)
                  ->assertJsonFragment(['name' => 'CryptoPay']);
@@ -26,7 +26,7 @@ class PaymentAdminApiTest extends TestCase
     {
         $admin = User::factory()->admin()->create();
 
-        $response = $this->actingAs($admin)->postJson('/api/v1/admin/payment/save', [
+        $response = $this->actingAs($admin)->postJson($this->getAdminUri('payment/save'), [
             'name' => 'Stripe Integration',
             'payment' => 'Stripe',
             'icon' => 'stripe',
@@ -44,7 +44,7 @@ class PaymentAdminApiTest extends TestCase
         $admin = User::factory()->admin()->create();
         $payment = Payment::factory()->create();
 
-        $response = $this->actingAs($admin)->postJson('/api/v1/admin/payment/drop', [
+        $response = $this->actingAs($admin)->postJson($this->getAdminUri('payment/drop'), [
             'id' => $payment->id
         ]);
 

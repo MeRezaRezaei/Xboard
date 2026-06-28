@@ -25,7 +25,8 @@ class AdminMiddlewareTest extends TestCase
     {
         $admin = User::factory()->admin()->create();
 
-        $response = $this->actingAs($admin)->getJson('/_test/admin-only');
+        \Laravel\Sanctum\Sanctum::actingAs($admin);
+        $response = $this->getJson('/_test/admin-only');
 
         $response->assertStatus(200)
                  ->assertJson(['message' => 'Admin Access Granted']);
@@ -38,7 +39,8 @@ class AdminMiddlewareTest extends TestCase
             'is_staff' => 0,
         ]);
 
-        $response = $this->actingAs($user)->getJson('/_test/admin-only');
+        \Laravel\Sanctum\Sanctum::actingAs($user);
+        $response = $this->getJson('/_test/admin-only');
 
         // Expecting a forbidden status or unauthorized depending on your exception handler
         $response->assertStatus(403);

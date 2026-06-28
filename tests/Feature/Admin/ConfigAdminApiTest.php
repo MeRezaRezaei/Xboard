@@ -15,7 +15,7 @@ class ConfigAdminApiTest extends TestCase
     {
         $admin = User::factory()->admin()->create();
 
-        $response = $this->actingAs($admin)->getJson('/api/v1/admin/config/fetch');
+        $response = $this->actingAs($admin)->getJson($this->getAdminUri('config/fetch'));
 
         $response->assertStatus(200)
                  ->assertJsonStructure(['data']);
@@ -25,7 +25,7 @@ class ConfigAdminApiTest extends TestCase
     {
         $admin = User::factory()->admin()->create();
 
-        $response = $this->actingAs($admin)->postJson('/api/v1/admin/config/save', [
+        $response = $this->actingAs($admin)->postJson($this->getAdminUri('config/save'), [
             'app_name' => 'Xboard Test Engine',
             'app_url' => 'https://test.example.com',
             'app_description' => 'Automated testing environment'
@@ -34,7 +34,7 @@ class ConfigAdminApiTest extends TestCase
         $response->assertStatus(200);
 
         $this->assertDatabaseHas('v2_settings', [
-            'key' => 'app_name',
+            'name' => 'app_name',
             'value' => 'Xboard Test Engine'
         ]);
     }

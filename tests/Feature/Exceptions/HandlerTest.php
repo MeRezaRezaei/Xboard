@@ -28,7 +28,7 @@ class HandlerTest extends TestCase
     public function test_business_exception_renders_correct_json_response()
     {
         // Business exceptions often return a 200 OK HTTP status but with an error code in the JSON body
-        $exception = new BusinessException('Test Business Error', 500); 
+        $exception = new BusinessException([500, 'Test Business Error']);
         $request = Request::create('/api/v1/test', 'GET');
         
         $handler = app(\App\Exceptions\Handler::class);

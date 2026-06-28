@@ -27,7 +27,6 @@ class UserFactory extends Factory
             'commission_balance' => 0,
             'commission_rate' => 10.0,
             'commission_type' => User::COMMISSION_TYPE_SYSTEM,
-            'commission_auto_check' => 1,
             'reset_count' => 0,
             'is_admin' => 0,
             'is_staff' => 0,

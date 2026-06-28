@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Utils\Helper;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -61,7 +62,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens;
+    use HasApiTokens, HasFactory;
     protected $table = 'v2_user';
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
@@ -73,7 +74,6 @@ class User extends Authenticatable
         'is_staff' => 'boolean',
         'remind_expire' => 'boolean',
         'remind_traffic' => 'boolean',
-        'commission_auto_check' => 'boolean',
         'commission_rate' => 'float',
         'next_reset_at' => 'timestamp',
         'last_reset_at' => 'timestamp',

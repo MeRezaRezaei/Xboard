@@ -15,13 +15,15 @@ class CouponAdminApiTest extends TestCase
     {
         $admin = User::factory()->admin()->create();
 
-        $response = $this->actingAs($admin)->postJson('/api/v1/admin/coupon/generate', [
+        $response = $this->actingAs($admin)->postJson($this->getAdminUri('coupon/generate'), [
             'name' => 'Spring Sale',
             'type' => 2,
             'value' => 15, // 15% off
             'limit_use' => 100,
             'limit_use_with_user' => 1,
             'generate_count' => 5,
+            'started_at' => time(),
+            'ended_at' => time() + 3600,
         ]);
 
         $response->assertStatus(200);
@@ -35,7 +37,7 @@ class CouponAdminApiTest extends TestCase
         $admin = User::factory()->admin()->create();
         $coupon = Coupon::factory()->create();
 
-        $response = $this->actingAs($admin)->postJson('/api/v1/admin/coupon/drop', [
+        $response = $this->actingAs($admin)->postJson($this->getAdminUri('coupon/drop'), [
             'id' => $coupon->id
         ]);
 

@@ -13,6 +13,7 @@ class KnowledgeFactory extends Factory
     {
         return [
             'language' => 'en-US',
+            'category' => 'General',
             'title' => $this->faker->sentence(),
             'body' => $this->faker->paragraph(),
             'sort' => 0,

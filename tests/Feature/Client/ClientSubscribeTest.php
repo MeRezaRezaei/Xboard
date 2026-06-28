@@ -23,7 +23,7 @@ class ClientSubscribeTest extends TestCase
         ]);
 
         Server::factory()->create([
-            'group_id' => '["1"]',
+            'group_ids' => [1],
             'show' => 1
         ]);
 

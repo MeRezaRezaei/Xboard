@@ -28,7 +28,7 @@ class CheckTrafficExceededCommandTest extends TestCase
             'banned' => 0,
         ]);
 
-        $exitCode = Artisan::call('check:trafficExceeded');
+        $exitCode = Artisan::call('check:traffic-exceeded');
 
         $this->assertEquals(0, $exitCode);
 

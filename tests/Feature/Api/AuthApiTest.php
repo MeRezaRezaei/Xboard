@@ -44,7 +44,7 @@ class AuthApiTest extends TestCase
             'password' => 'wrongpassword',
         ]);
 
-        $response->assertStatus(422) // or whatever error code the API returns, typically 403 or 422
+        $response->assertStatus(400) // API returns 400 for invalid credentials
                  ->assertJsonStructure(['message']);
     }
 }

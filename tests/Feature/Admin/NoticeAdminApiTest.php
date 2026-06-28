@@ -15,7 +15,7 @@ class NoticeAdminApiTest extends TestCase
     {
         $admin = User::factory()->admin()->create();
 
-        $response = $this->actingAs($admin)->postJson('/api/v1/admin/notice/save', [
+        $response = $this->actingAs($admin)->postJson($this->getAdminUri('notice/save'), [
             'title' => 'New Feature Announcement',
             'content' => 'We have added a new feature to the platform.',
             'show' => 1,
@@ -34,7 +34,7 @@ class NoticeAdminApiTest extends TestCase
         $admin = User::factory()->admin()->create();
         $notice = Notice::factory()->create(['title' => 'Old Title']);
 
-        $response = $this->actingAs($admin)->postJson('/api/v1/admin/notice/save', [
+        $response = $this->actingAs($admin)->postJson($this->getAdminUri('notice/save'), [
             'id' => $notice->id,
             'title' => 'Updated Title',
             'content' => 'Updated content here.',
@@ -54,7 +54,7 @@ class NoticeAdminApiTest extends TestCase
         $admin = User::factory()->admin()->create();
         $notice = Notice::factory()->create();
 
-        $response = $this->actingAs($admin)->postJson('/api/v1/admin/notice/drop', [
+        $response = $this->actingAs($admin)->postJson($this->getAdminUri('notice/drop'), [
             'id' => $notice->id,
         ]);
 

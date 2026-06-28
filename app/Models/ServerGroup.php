@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -17,6 +18,8 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
  */
 class ServerGroup extends Model
 {
+    use HasFactory;
+
     protected $table = 'v2_server_group';
     protected $dateFormat = 'U';
     protected $casts = [

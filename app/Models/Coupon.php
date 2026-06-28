@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Services\PlanService;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {
+    use HasFactory;
     protected $table = 'v2_coupon';
     protected $dateFormat = 'U';
     protected $guarded = ['id'];

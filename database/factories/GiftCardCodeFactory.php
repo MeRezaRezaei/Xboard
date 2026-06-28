@@ -13,10 +13,9 @@ class GiftCardCodeFactory extends Factory
     public function definition()
     {
         return [
-            'template_id' => null,
+            'template_id' => 1,
             'code' => strtoupper(Str::random(12)),
-            'balance' => 5000, // $50.00 equivalent
-            'status' => 0, // 0: Unused, 1: Used
+            'status' => 0,
             'created_at' => time(),
             'updated_at' => time(),
         ];

@@ -38,7 +38,7 @@ class TrafficFetchJobTest extends TestCase
             ]
         ];
 
-        TrafficFetchJob::dispatch($server->toArray(), $data);
+        TrafficFetchJob::dispatch($server->toArray(), $data, 'socks', time());
 
         Queue::assertPushed(TrafficFetchJob::class);
     }

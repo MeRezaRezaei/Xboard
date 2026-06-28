@@ -15,7 +15,7 @@ class UserAdminApiTest extends TestCase
         $admin = User::factory()->admin()->create();
         User::factory()->create(['email' => 'client@example.com']);
 
-        $response = $this->actingAs($admin)->getJson('/api/v1/admin/user/fetch');
+        $response = $this->actingAs($admin)->getJson($this->getAdminUri('user/fetch'));
 
         $response->assertStatus(200)
                  ->assertJsonFragment(['email' => 'client@example.com']);
@@ -28,7 +28,7 @@ class UserAdminApiTest extends TestCase
             'is_staff' => 0,
         ]);
 
-        $response = $this->actingAs($user)->getJson('/api/v1/admin/user/fetch');
+        $response = $this->actingAs($user)->getJson($this->getAdminUri('user/fetch'));
 
         $response->assertStatus(403);
     }

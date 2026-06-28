@@ -24,7 +24,7 @@ class NodeUserSyncJobTest extends TestCase
             'rate' => 1.0,
         ]);
 
-        NodeUserSyncJob::dispatch($server->id);
+        NodeUserSyncJob::dispatch(1, 'add');
 
         Queue::assertPushed(NodeUserSyncJob::class);
     }
