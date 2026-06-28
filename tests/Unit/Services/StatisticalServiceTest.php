@@ -1,0 +1,23 @@
+<?php
+
+namespace Tests\Unit\Services;
+
+use Tests\TestCase;
+use App\Services\StatisticalService;
+use App\Models\ServerLog;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class StatisticalServiceTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_statistical_service_methods_exist()
+    {
+        $service = new StatisticalService();
+        
+        $this->assertTrue(method_exists($service, 'generateStatUser'));
+        $this->assertTrue(method_exists($service, 'generateStatServer'));
+        $this->assertTrue(method_exists($service, 'getStatUser'));
+        $this->assertTrue(method_exists($service, 'getStatServer'));
+    }
+}

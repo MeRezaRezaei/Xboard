@@ -1,28 +1,58 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\User;
-use Faker\Generator as Faker;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
+class UserFactory extends Factory
+{
+    protected $model = User::class;
 
-$factory->define(User::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'remember_token' => Str::random(10),
-    ];
-});
+    public function definition()
+    {
+        return [
+            'email' => $this->faker->unique()->safeEmail(),
+            'password' => bcrypt('password123'),
+            'uuid' => $this->faker->uuid(),
+            'token' => Str::random(16),
+            'transfer_enable' => 100 * 1024 * 1024 * 1024, // 100 GB
+            'u' => 0,
+            'd' => 0,
+            'banned' => 0,
+            'remind_expire' => 1,
+            'remind_traffic' => 1,
+            'balance' => 0,
+            'commission_balance' => 0,
+            'commission_rate' => 10.0,
+            'commission_type' => User::COMMISSION_TYPE_SYSTEM,
+            'commission_auto_check' => 1,
+            'reset_count' => 0,
+            'is_admin' => 0,
+            'is_staff' => 0,
+            'created_at' => time(),
+            'updated_at' => time(),
+        ];
+    }
+
+    public function admin()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_admin' => 1,
+                'is_staff' => 1,
+            ];
+        });
+    }
+
+    public function activePlan()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'plan_id' => 1, // Will be overridden in tests
+                'expired_at' => time() + (30 * 24 * 60 * 60), // +30 days
+            ];
+        });
+    }
+}
