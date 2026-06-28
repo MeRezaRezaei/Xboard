@@ -49,3 +49,4 @@ project_export.md
 /.brain-index/
 .tmp
 .phpunit.cache/
+.remember/
